@@ -17,11 +17,15 @@ export class UsuarioComponent implements OnInit {
    }
 
   ngOnInit() {
-
     this.usuarioService.getListaDeUsuarios().subscribe(data => {
 
       this.usuarios = data;
     })
   }
 
+  excluirUsuario(id: Number){
+    this.usuarioService.excluirUsuario(id).subscribe(data => {
+      console.log('Response ->' + data);
+    });
+  }
 }

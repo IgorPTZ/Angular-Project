@@ -1,18 +1,22 @@
-<table>
+<table class="table">
 
-<thead>
-	<th>Id</th>
-	<th>Nome</th>
-	<th>Cpf</th>
-</thead>
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Login</th>
+			<th scope="col">Nome</th>
+			<th scope="col">Cpf</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
 
-<tbody>
-
-	<tr *ngFor="let usuario of usuarios">
-		<td>{{usuario.id}}</td>
-		<td>{{usuario.login}}</td>
-		<td>{{usuario.nome}}</td>
-		<td>{{usuario.cpf}}</td>
-	</tr>
-</tbody>
+	<tbody>
+		<tr *ngFor="let usuario of usuarios">
+			<td>{{usuario.id}}</td>
+			<td>{{usuario.login}}</td>
+			<td>{{usuario.nome}}</td>
+			<td>{{usuario.cpf}}</td>
+			<td><button (click)="excluirUsuario(usuario.id)" class="btn btn-primary">Excluir</button></td>
+		</tr>
+	</tbody>
 </table>
