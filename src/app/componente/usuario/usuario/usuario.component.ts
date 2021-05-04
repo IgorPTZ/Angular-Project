@@ -12,20 +12,25 @@ export class UsuarioComponent implements OnInit {
 
   usuarios: Observable<Usuario[]>;
 
-  constructor(private usuarioService : UsuarioService) {
+  constructor(private usuarioService: UsuarioService) {
 
-   }
+  }
 
   ngOnInit() {
     this.usuarioService.getListaDeUsuarios().subscribe(data => {
 
       this.usuarios = data;
-    })
+    });
   }
 
-  excluirUsuario(id: Number){
+  excluirUsuario(id: Number) {
     this.usuarioService.excluirUsuario(id).subscribe(data => {
       console.log('Response ->' + data);
+
+      this.usuarioService.getListaDeUsuarios().subscribe(data => {
+
+        this.usuarios = data;
+      });
     });
   }
 }
