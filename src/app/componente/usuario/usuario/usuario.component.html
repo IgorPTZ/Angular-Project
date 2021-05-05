@@ -1,3 +1,18 @@
+<br/>
+<br/>
+
+<form class="form-inline">
+	<div class="form-group mx-sm-3 mb-2">
+		<input type="text" class="form-control" [(ngModel)]="nome" id="nome" name="nome" placeholder="Digite o nome do usuario">
+	</div>
+	<button type="button" (click)="consultarUsuario()" class="btn btn-primary mb-2">Pesquisar</button>
+
+	<button type="button" class="btn btn-success mb-2">Adicionar usuario</button>
+</form>
+
+<br/>
+<br/>
+
 <table class="table">
 
 	<thead class="thead-dark">
@@ -6,7 +21,8 @@
 			<th scope="col">Login</th>
 			<th scope="col">Nome</th>
 			<th scope="col">Cpf</th>
-			<th scope="col"></th>
+			<th scope="col">Exclusao</th>
+			<th scope="col">Edicao</th>
 		</tr>
 	</thead>
 
@@ -16,7 +32,8 @@
 			<td>{{usuario.login}}</td>
 			<td>{{usuario.nome}}</td>
 			<td>{{usuario.cpf}}</td>
-			<td><button (click)="excluirUsuario(usuario.id)" class="btn btn-primary">Excluir</button></td>
+			<td><button (click)="excluirUsuario(usuario.id)" class="btn btn-danger">Excluir</button></td>
+			<td><button [routerLink]="['/usuarioAdd', usuario.id]" class="btn btn-warning">Editar</button></td>
 		</tr>
 	</tbody>
 </table>

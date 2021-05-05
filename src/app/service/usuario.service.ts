@@ -8,18 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  constructor(private http : HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) { }
 
   getListaDeUsuarios(): Observable<any> {
     return this.http.get<any>(AppConstants.baseUrl);
   }
 
-  excluirUsuario(id:Number) : Observable<any> {
-
+  excluirUsuario(id: Number): Observable<any> {
     return this.http.delete(AppConstants.baseUrl + id, {
-      responseType : 'text'
+      responseType: 'text'
     });
+  }
+
+  consultarUsuario(nome: String): Observable<any> {
+    return this.http.get(AppConstants.baseUrl + "obter-usuarios-pelo-nome/" + nome);
   }
 }

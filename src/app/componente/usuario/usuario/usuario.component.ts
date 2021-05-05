@@ -12,6 +12,8 @@ export class UsuarioComponent implements OnInit {
 
   usuarios: Observable<Usuario[]>;
 
+  nome: String;
+
   constructor(private usuarioService: UsuarioService) {
 
   }
@@ -31,6 +33,12 @@ export class UsuarioComponent implements OnInit {
 
         this.usuarios = data;
       });
+    });
+  }
+
+  consultarUsuario() {
+    this.usuarioService.consultarUsuario(this.nome).subscribe(data => {
+      this.usuarios = data;
     });
   }
 }
