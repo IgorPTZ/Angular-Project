@@ -36,8 +36,8 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  consultarUsuario() {
-    this.usuarioService.consultarUsuario(this.nome).subscribe(data => {
+  consultarUsuarioPeloNome() {
+    this.usuarioService.consultarUsuarioPeloNome(this.nome).subscribe(data => {
       this.usuarios = data;
     });
   }

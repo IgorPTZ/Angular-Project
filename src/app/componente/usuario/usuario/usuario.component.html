@@ -7,7 +7,7 @@
 	<div class="form-group mx-sm-3 mb-2">
 		<input type="text" class="form-control" [(ngModel)]="nome" id="nome" name="nome" placeholder="Digite o nome do usuario">
 	</div>
-	<button type="button" (click)="consultarUsuario()" class="btn btn-primary mb-2">Pesquisar</button>
+	<button type="button" (click)="consultarUsuarioPeloNome()" class="btn btn-primary mb-2">Pesquisar</button>
 
 	<button type="button" [routerLink]="['/usuarioAdd']" routerLinkActive="router-link-active" style="margin-left: 5px;" class="btn btn-success mb-2">Adicionar usuario</button>
 </form>

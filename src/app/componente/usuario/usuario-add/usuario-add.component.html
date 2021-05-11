@@ -1,10 +1,48 @@
 <h3 style="text-align:center">Usuario</h3>
 
-<form>
+<form #formValidate="ngForm">
 	<div class="form-row">
 		<div class="form-group col-md-1">
 			<label for="id">Id</label>
-			<input type="text" class="form-control" id="id" readonly="readonly">
+			<input type="text" [(ngModel)]="usuario.id" class="form-control" id="id" name="id" readonly="true" autocomplete="false">
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="nome">Nome</label>
+			<span style="color: red; font-size: 23px;" *ngIf="nomeValidate.invalid"> *</span>
+			<input type="text" [(ngModel)]="usuario.nome" #nomeValidate="ngModel" class="form-control" id="nome" name="nome" required="true" autocomplete="false">
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="login">Login</label>
+			<span style="color: red; font-size: 23px;" *ngIf="loginValidate.invalid"> *</span>
+			<input type="email" [(ngModel)]="usuario.login" #loginValidate="ngModel" class="form-control" id="login" name="login" required="true" autocomplete="false">
+		</div>
+
+		<div class="form-group col-md-6">
+			<label for="senha">Senha</label>
+			<span style="color: red; font-size: 23px;" *ngIf="senhaValidate.invalid"> *</span>
+			<input type="password" [(ngModel)]="usuario.senha" #senhaValidate="ngModel" class="form-control" id="senha" name="senha" required="true" autocomplete="false">
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for="cpf">Cpf</label>
+			<span style="color: red; font-size: 23px;" *ngIf="cpfValidate.invalid"> *</span>
+			<input type="text" [(ngModel)]="usuario.cpf" #cpfValidate="ngModel" class="form-control" id="cpf" name="cpf" required="true" autocomplete="false">
+		</div>
+	</div>
+
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<button type="button" class="btn btn-primary" [routerLink]="['/usuarios']" routerLinkActive="router-link-active">Voltar</button>
+			<button type="button" class="btn btn-warning" (click)="limparDadosDoUsuario()" style="margin-left: 10px;">Novo</button>
+			<button type="button" class="btn btn-success" [disabled]="formValidate.invalid" (click)="salvarUsuario()" style="margin-left: 10px;">Salvar</button>
 		</div>
 	</div>
 </form>
