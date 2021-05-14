@@ -22,8 +22,17 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public sair() {
+  public sair(): void {
     localStorage.clear();
     this.router.navigate(['login']);
+  }
+
+  public esconderBarra(): boolean {
+    // Exibe a barra do menu se o usuario estiver logado, caso contrário a barra será desativada.
+    if (localStorage.getItem('token') !== null && localStorage.getItem('token').toString().trim() !== null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
