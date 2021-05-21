@@ -12,7 +12,7 @@ export class UsuarioComponent implements OnInit {
 
   usuarios: Observable<Usuario[]>;
 
-  nome: String;
+  nome: string;
 
   constructor(private usuarioService: UsuarioService) {
 
@@ -25,15 +25,19 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  excluirUsuario(id: Number) {
-    this.usuarioService.excluirUsuario(id).subscribe(data => {
-      console.log('Response ->' + data);
+  excluirUsuario(id: number) {
 
-      this.usuarioService.getListaDeUsuarios().subscribe(data => {
+    if (confirm('Deseja excluir esse usuario?')) {
 
-        this.usuarios = data;
+      this.usuarioService.excluirUsuario(id).subscribe(data => {
+        console.log('Response ->' + data);
+
+        this.usuarioService.getListaDeUsuarios().subscribe(data => {
+
+          this.usuarios = data;
+        });
       });
-    });
+    }
   }
 
   consultarUsuarioPeloNome() {

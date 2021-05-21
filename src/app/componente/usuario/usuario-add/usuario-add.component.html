@@ -38,6 +38,42 @@
 		</div>
 	</div>
 
+	<div class="card text-center">
+		<div class="card-header">
+			Telefones do usuario
+		</div>
+
+		<div class="card-body" style="padding-left: 1px;">
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<input text="text" class="form-control" id="numero" name="numero" [(ngModel)]="telefone.numero">
+				</div>
+
+				<div class="form-group col-md-2">
+					<button class="btn btn-primary" (click)="adicionarTelefone()">Adicionar telefone</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Numero</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr *ngFor="let telefone of usuario.telefones; let i = index">
+				<td>{{telefone.id}}</td>
+				<td>{{telefone.numero}}</td>
+				<td><button class="btn btn-danger" (click)="removerTelefone(telefone.id, i)">Excluir</button></td>
+			</tr>
+		</tbody>
+	</table>
+
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<button type="button" class="btn btn-primary" [routerLink]="['/usuarios']" routerLinkActive="router-link-active">Voltar</button>

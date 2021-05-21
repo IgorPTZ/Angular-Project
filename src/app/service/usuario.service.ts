@@ -15,17 +15,18 @@ export class UsuarioService {
     return this.http.get<any>(AppConstants.baseUrl);
   }
 
-  excluirUsuario(id: Number): Observable<any> {
+  excluirUsuario(id: number): Observable<any> {
     return this.http.delete(AppConstants.baseUrl + id, {
       responseType: 'text'
     });
   }
 
-  consultarUsuarioPeloId(id: String): Observable<any> {
+  consultarUsuarioPeloId(id: string): Observable<any> {
     return this.http.get<any>(AppConstants.baseUrl + 'v1/' + id);
   }
 
-  consultarUsuarioPeloNome(nome: String): Observable<any> {
+  consultarUsuarioPeloNome(nome: string): Observable<any> {
+    // tslint:disable-next-line: quotemark
     return this.http.get(AppConstants.baseUrl + "obter-usuarios-pelo-nome/" + nome);
   }
 
@@ -35,6 +36,11 @@ export class UsuarioService {
 
   editarUsuario(usuario: Usuario): Observable<any> {
     return this.http.put<any>(AppConstants.baseUrl, usuario);
+  }
+
+  removerTelefone(id: number): Observable<any> {
+    // tslint:disable-next-line: quotemark
+    return this.http.delete(AppConstants.baseUrl + "excluir-telefone/" + id, {responseType: 'text'});
   }
 
   isUsuarioAutenticado(): boolean {

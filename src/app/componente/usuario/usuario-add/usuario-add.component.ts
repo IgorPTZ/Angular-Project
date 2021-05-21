@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
+import { Telefone } from 'src/app/model/telefone';
 
 @Component({
   selector: 'app-add',
@@ -12,13 +13,15 @@ export class UsuarioAddComponent implements OnInit {
 
   usuario = new Usuario();
 
+  telefone = new Telefone();
+
   constructor(private routeActive: ActivatedRoute, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     let id = this.routeActive.snapshot.paramMap.get('id');
 
     if (id != null) {
-      console.log('Edicao de usuario (Id:' + id + ')');
+      console.info('Edicao de usuario (Id:' + id + ')');
       this.usuarioService.consultarUsuarioPeloId(id).subscribe(data => {
         this.usuario = data;
       });
@@ -27,6 +30,33 @@ export class UsuarioAddComponent implements OnInit {
 
   limparDadosDoUsuario() {
     this.usuario = new Usuario();
+    this.telefone = new Telefone();
+  }
+
+  adicionarTelefone() {
+
+    if(this.usuario.telefones === undefined) {
+      this.usuario.telefones = new Array<Telefone>();
+    }
+
+    this.usuario.telefones.push(this.telefone);
+    this.telefone = new Telefone();
+  }
+
+  removerTelefone(id, index) {
+    if (id == null) {
+      this.usuario.telefones.splice(index, 1);
+      return;
+    }
+
+    if (id != null && confirm("Deseja realmente remover esse telefone?")) {
+
+      this.usuarioService.removerTelefone(id).subscribe(data => { 
+        // Remove o telefone excluido no banco de dados da lista de telefones do usuario;
+        this.usuario.telefones.splice(index, 1);
+        console.info(data);
+      });
+    }
   }
 
   salvarUsuario() {

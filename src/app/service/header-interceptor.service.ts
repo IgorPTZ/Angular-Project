@@ -2,8 +2,8 @@ import { Injectable, NgModule } from '@angular/core';
 // tslint:disable-next-line: max-line-length
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class HeaderInterceptorService implements HttpInterceptor {
@@ -21,7 +21,13 @@ export class HeaderInterceptorService implements HttpInterceptor {
         headers: req.headers.set('Authorization', token)
       });
 
-      return next.handle(requestComTokenAdicionado).pipe(catchError(this.processarErros));
+      return next.handle(requestComTokenAdicionado).pipe(
+        tap((event: HttpEvent<any>) => {
+          if (event instanceof HttpResponse && (event.status === 200 || event.status === 201)) {
+            console.info('Operacao realizada com sucesso!');
+          }
+        })
+        , catchError(this.processarErros));
     } else { // Caso nao exista o token, envia a requisicao sem o token (Ex: Request para obter o token)
       return next.handle(req).pipe(catchError(this.processarErros));
     }
