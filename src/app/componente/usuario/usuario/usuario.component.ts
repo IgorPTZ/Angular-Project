@@ -10,9 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioComponent implements OnInit {
 
+  pagina = 1;
+
   usuarios: Observable<Usuario[]>;
 
   nome: string;
+
+  total: number;
 
   constructor(private usuarioService: UsuarioService) {
 
@@ -21,7 +25,7 @@ export class UsuarioComponent implements OnInit {
   ngOnInit() {
     this.usuarioService.getListaDeUsuarios().subscribe(data => {
 
-      this.usuarios = data;
+      this.usuarios = data.content;
     });
   }
 
@@ -44,5 +48,10 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.consultarUsuarioPeloNome(this.nome).subscribe(data => {
       this.usuarios = data;
     });
+  }
+
+  carregarPagina(pagina) {
+
+    console.info("Pagina -> " + pagina);
   }
 }
