@@ -15,6 +15,10 @@ export class UsuarioService {
     return this.http.get<any>(AppConstants.baseUrl);
   }
 
+  getListaDeUsuariosPaginados(pagina: number): Observable<any> {
+    return this.http.get<any>(AppConstants.baseUrl + 'pagina/' + pagina);
+  }
+
   excluirUsuario(id: number): Observable<any> {
     return this.http.delete(AppConstants.baseUrl + id, {
       responseType: 'text'

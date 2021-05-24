@@ -10,12 +10,14 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioComponent implements OnInit {
 
+  // Variavel utilizada para paginacao
   pagina = 1;
 
-  usuarios: Observable<Usuario[]>;
+  usuarios: Array<Usuario[]>;
 
   nome: string;
 
+  // Variavel utilizada para paginacao
   total: number;
 
   constructor(private usuarioService: UsuarioService) {
@@ -23,23 +25,25 @@ export class UsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usuarioService.getListaDeUsuarios().subscribe(data => {
+    this.usuarioService.getListaDeUsuariosPaginados(0).subscribe(data => {
 
+      // Conteudo do response paginado
       this.usuarios = data.content;
+
+      // Numero total de elementos paginados
+      this.total = data.totalElements;
     });
   }
 
-  excluirUsuario(id: number) {
+  excluirUsuario(id: number, index: number) {
 
     if (confirm('Deseja excluir esse usuario?')) {
 
-      this.usuarioService.excluirUsuario(id).subscribe(data => {
-        console.log('Response ->' + data);
+      this.usuarioService.excluirUsuario(id).subscribe(dataOne => {
+        console.log('Response ->' + dataOne);
 
-        this.usuarioService.getListaDeUsuarios().subscribe(data => {
-
-          this.usuarios = data;
-        });
+        // Remove usuario excluido no banco de dados da tela
+        this.usuarios.splice(index, 1);
       });
     }
   }
@@ -50,8 +54,11 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  carregarPagina(pagina) {
+  carregarPagina(pagina: number) {
 
-    console.info("Pagina -> " + pagina);
+    this.usuarioService.getListaDeUsuariosPaginados((pagina - 1)).subscribe(data => {
+      this.usuarios = data.content;
+      this.total = data.totalElements;
+    });
   }
 }
