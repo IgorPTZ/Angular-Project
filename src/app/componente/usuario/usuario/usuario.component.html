@@ -29,12 +29,12 @@
 	</thead>
 
 	<tbody>
-		<tr *ngFor="let usuario of usuarios | paginate:{itemsPerPage: 5, currentPage: pagina, totalItems : total }">
+		<tr *ngFor="let usuario of usuarios | paginate:{itemsPerPage: 5, currentPage: pagina, totalItems : total }; let i = index">
 			<td>{{usuario.id}}</td>
 			<td>{{usuario.login}}</td>
 			<td>{{usuario.nome}}</td>
 			<td>{{usuario.cpf}}</td>
-			<td><button (click)="excluirUsuario(usuario.id)" class="btn btn-danger">Excluir</button></td>
+			<td><button (click)="excluirUsuario(usuario.id, i)" class="btn btn-danger">Excluir</button></td>
 			<td><button [routerLink]="['/usuarioAdd', usuario.id]" class="btn btn-warning">Editar</button></td>
 		</tr>
 	</tbody>
