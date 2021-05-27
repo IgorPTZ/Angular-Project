@@ -52,7 +52,8 @@ export class UsuarioComponent implements OnInit {
     console.info(this.nome);
 
     this.usuarioService.consultarUsuarioPeloNome(this.nome).subscribe(data => {
-      this.usuarios = data;
+      this.usuarios = data.content;
+      this.total = data.totalElements;
     });
   }
 
