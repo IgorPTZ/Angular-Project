@@ -49,19 +49,30 @@ export class UsuarioComponent implements OnInit {
   }
 
   consultarUsuarioPeloNome() {
-    console.info(this.nome);
-
-    this.usuarioService.consultarUsuarioPeloNome(this.nome).subscribe(data => {
-      this.usuarios = data.content;
-      this.total = data.totalElements;
-    });
+    if (this.nome === '') {
+      this.usuarioService.getListaDeUsuariosPaginados(0).subscribe(data => {
+        this.usuarios = data.content;
+        this.total = data.totalElements;
+      });
+    } else {
+      this.usuarioService.consultarUsuarioPeloNome(this.nome).subscribe(data => {
+        this.usuarios = data.content;
+        this.total = data.totalElements;
+      });
+    }
   }
 
   carregarPagina(pagina: number) {
-
-    this.usuarioService.getListaDeUsuariosPaginados((pagina - 1)).subscribe(data => {
-      this.usuarios = data.content;
-      this.total = data.totalElements;
-    });
+    if (this.nome !== '') {
+      this.usuarioService.consultarUsuarioPaginadoPeloNome(this.nome, (pagina - 1)).subscribe(data => {
+        this.usuarios = data.content;
+        this.total = data.totalElements;
+      });
+    } else {
+      this.usuarioService.getListaDeUsuariosPaginados((pagina - 1)).subscribe(data => {
+        this.usuarios = data.content;
+        this.total = data.totalElements;
+      });
+    }
   }
 }

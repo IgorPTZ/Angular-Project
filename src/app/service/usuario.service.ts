@@ -34,6 +34,10 @@ export class UsuarioService {
     return this.http.get(AppConstants.baseUrl + "obter-usuarios-pelo-nome/" + nome);
   }
 
+  consultarUsuarioPaginadoPeloNome(nome: string, pagina: number): Observable<any> {
+    return this.http.get<any>(AppConstants.baseUrl + 'obter-usuarios-paginados-pelo-nome/' + nome + '/pagina/' + pagina);
+  }
+
   criarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>(AppConstants.baseUrl, usuario);
   }
