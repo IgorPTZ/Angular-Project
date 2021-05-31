@@ -13,4 +13,6 @@ export class Usuario {
 	cpf: string;
 
 	telefones: Array<Telefone>;
+
+	dataDeNascimento: string;
 }
