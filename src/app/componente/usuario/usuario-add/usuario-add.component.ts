@@ -1,13 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { Telefone } from 'src/app/model/telefone';
+import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+@Injectable()
+export class FormatadorDeData extends NgbDateParserFormatter {
+  
+  parse(value: string): NgbDateStruct {
+    throw new Error("Method not implemented.");
+  }
+  
+  format(date: NgbDateStruct): string {
+    throw new Error("Method not implemented.");
+  } 
+}
 
 @Component({
   selector: 'app-add',
   templateUrl: './usuario-add.component.html',
-  styleUrls: ['./usuario-add.component.css']
+  styleUrls: ['./usuario-add.component.css'],
+  providers: [{provide: NgbDateParserFormatter, useClass: FormatadorDeData}]
 })
 export class UsuarioAddComponent implements OnInit {
 

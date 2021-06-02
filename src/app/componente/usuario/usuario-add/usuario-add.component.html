@@ -31,10 +31,25 @@
 	</div>
 
 	<div class="form-row">
-		<div class="form-group col-md-4">
+		<div class="form-group col-md-3">
 			<label for="cpf">Cpf</label>
 			<span style="color: red; font-size: 23px;" *ngIf="cpfValidate.invalid"> *</span>
 			<input type="text" mask="000.000.000.00" [(ngModel)]="usuario.cpf" #cpfValidate="ngModel" class="form-control" id="cpf" name="cpf" required="true" autocomplete="false">
+		</div>
+
+		<div ckass="form-group col-md-3">
+			<label for="dataDeNascimento">Data de nascimento</label>
+			<span style="color: red; font-size: 23px;" *ngIf="dataDeNascimentoValidate.invalid"> *</span>
+			<div class="input-group">
+				<input name="dataDeNascimento" id="dataDeNascimento" required="true"
+				[(ngModel)]="usuario.dataDeNascimento" #dataDeNascimentoValidate="ngModel" 
+				type="text" class="form-control" placeholder="dd/mm/yyyy" 
+				ngbDatepicker #dataDeNascimento="ngbDatepicker">
+
+				<div class="input-group-append">
+					<button class="btn btn-primary" (click)="dataDeNascimento.toggle()" type="button"></button>
+				</div>
+			</div>
 		</div>
 	</div>
 
