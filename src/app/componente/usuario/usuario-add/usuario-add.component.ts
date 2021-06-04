@@ -3,18 +3,68 @@ import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { Telefone } from 'src/app/model/telefone';
-import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDateStruct, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+
+@Injectable()
+export class FormatDateAdapter extends NgbDateAdapter<string> {
+  
+  readonly DELIMITER = '';
+  
+  fromModel(value: string | null): NgbDateStruct | null {
+    if (value) {
+      const date = value.split(this.DELIMITER);
+      
+      return {
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
+      };
+    }
+
+    return null;
+  }
+
+  toModel(date: NgbDateStruct): string {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+  }
+}
 
 @Injectable()
 export class FormatadorDeData extends NgbDateParserFormatter {
-  
-  parse(value: string): NgbDateStruct {
-    throw new Error("Method not implemented.");
+
+  readonly DELIMITER = '/';
+
+  parse(value: string): NgbDateStruct | null {
+    if (value) {
+      const date = value.split(this.DELIMITER);
+
+      return {
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
+      };
+    }
+
+    return null;
   }
   
-  format(date: NgbDateStruct): string {
-    throw new Error("Method not implemented.");
-  } 
+  format(date: NgbDateStruct): string | null {
+
+    return date ? formatarString(date.day) + this.DELIMITER + formatarString(date.month) + this.DELIMITER + date.year : '';
+  }
+
+  toModel(date: NgbDateStruct | null): string | null {
+    
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+  }
+}
+
+function formatarString(valor) {
+  if (valor.toString !== '' && parseInt(valor) <= 9) {
+    return '0' + valor;
+  } else {
+    return valor;
+  }
 }
 
 @Component({
