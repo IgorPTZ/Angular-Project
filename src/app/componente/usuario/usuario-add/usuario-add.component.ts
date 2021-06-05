@@ -7,13 +7,13 @@ import { NgbDateParserFormatter, NgbDateStruct, NgbDateAdapter } from '@ng-boots
 
 @Injectable()
 export class FormatDateAdapter extends NgbDateAdapter<string> {
-  
-  readonly DELIMITER = '';
-  
+
+  readonly DELIMITER = '/';
+
   fromModel(value: string | null): NgbDateStruct | null {
     if (value) {
       const date = value.split(this.DELIMITER);
-      
+
       return {
         day: parseInt(date[0], 10),
         month: parseInt(date[1], 10),
@@ -24,7 +24,7 @@ export class FormatDateAdapter extends NgbDateAdapter<string> {
     return null;
   }
 
-  toModel(date: NgbDateStruct): string {
+  toModel(date: NgbDateStruct | null): string | null {
     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
   }
 }
@@ -47,14 +47,13 @@ export class FormatadorDeData extends NgbDateParserFormatter {
 
     return null;
   }
-  
+
   format(date: NgbDateStruct): string | null {
 
     return date ? formatarString(date.day) + this.DELIMITER + formatarString(date.month) + this.DELIMITER + date.year : '';
   }
 
   toModel(date: NgbDateStruct | null): string | null {
-    
     return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
   }
 }
@@ -71,7 +70,8 @@ function formatarString(valor) {
   selector: 'app-add',
   templateUrl: './usuario-add.component.html',
   styleUrls: ['./usuario-add.component.css'],
-  providers: [{provide: NgbDateParserFormatter, useClass: FormatadorDeData}]
+  providers: [{ provide: NgbDateParserFormatter, useClass: FormatadorDeData },
+  { provide: NgbDateAdapter, useClass: FormatDateAdapter }]
 })
 export class UsuarioAddComponent implements OnInit {
 
@@ -99,7 +99,7 @@ export class UsuarioAddComponent implements OnInit {
 
   adicionarTelefone() {
 
-    if(this.usuario.telefones === undefined) {
+    if (this.usuario.telefones === undefined) {
       this.usuario.telefones = new Array<Telefone>();
     }
 
@@ -115,7 +115,7 @@ export class UsuarioAddComponent implements OnInit {
 
     if (id != null && confirm("Deseja realmente remover esse telefone?")) {
 
-      this.usuarioService.removerTelefone(id).subscribe(data => { 
+      this.usuarioService.removerTelefone(id).subscribe(data => {
         // Remove o telefone excluido no banco de dados da lista de telefones do usuario;
         this.usuario.telefones.splice(index, 1);
         console.info(data);
