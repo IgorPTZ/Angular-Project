@@ -5,4 +5,6 @@ export class AppConstants {
 	public static get baseLogin(): string {return this.baseServidor + "springrestapithree/login"}
 
 	public static get baseUrl(): string {return this.baseServidor + "springrestapithree/usuario/"}
+
+	public static get getBaseUrlPath() : string {return this.baseServidor + "springrestapithree/"}
 }

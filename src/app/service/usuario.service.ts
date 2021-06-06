@@ -46,6 +46,10 @@ export class UsuarioService {
     return this.http.put<any>(AppConstants.baseUrl, usuario);
   }
 
+  consultarProfissoes(): Observable<any> {
+    return this.http.get<any>(AppConstants.getBaseUrlPath + 'profissao/');
+  }
+
   removerTelefone(id: number): Observable<any> {
     // tslint:disable-next-line: quotemark
     return this.http.delete(AppConstants.baseUrl + "excluir-telefone/" + id, {responseType: 'text'});

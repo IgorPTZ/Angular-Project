@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import { Telefone } from 'src/app/model/telefone';
 import { NgbDateParserFormatter, NgbDateStruct, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { Profissao } from 'src/app/model/profissao';
 
 @Injectable()
 export class FormatDateAdapter extends NgbDateAdapter<string> {
@@ -79,15 +80,26 @@ export class UsuarioAddComponent implements OnInit {
 
   telefone = new Telefone();
 
+  profissoes: Array<Profissao>;
+
   constructor(private routeActive: ActivatedRoute, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+
+    this.usuarioService.consultarProfissoes().subscribe(data => {
+      this.profissoes = data;
+    });
+
     let id = this.routeActive.snapshot.paramMap.get('id');
 
     if (id != null) {
       console.info('Edicao de usuario (Id:' + id + ')');
       this.usuarioService.consultarUsuarioPeloId(id).subscribe(data => {
         this.usuario = data;
+
+        if (this.usuario.profissao == null) {
+          this.usuario.profissao = new Profissao();
+        }
       });
     }
   }

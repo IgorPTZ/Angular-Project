@@ -44,12 +44,20 @@
 				<input name="dataDeNascimento" id="dataDeNascimento" required="true"
 				[(ngModel)]="usuario.dataDeNascimento" #dataDeNascimentoValidate="ngModel" 
 				type="text" class="form-control" placeholder="dd/mm/yyyy" 
-				ngbDatepicker #dataDeNascimento="ngbDatepicker">
+				ngbDatepicker #dataDeNascimento="ngbDatepicker" [minDate]="{year: 1970, month: 1, day: 1}">
 
 				<div class="input-group-append">
 					<button class="btn btn-primary" (click)="dataDeNascimento.toggle()" type="button"></button>
 				</div>
 			</div>
+		</div>
+
+		<div class="form-group col-md-3">
+			<label for="profissao">Profissao</label>
+			<span style="color: red;font-size:23px;" *ngIf="profissaoValidate.invalid"> *</span>
+			<select [(ngModel)]="usuario.profissao.id" id="profissao" name="profissao" #profissaoValidate="ngModel" class="form-control" required="true">
+				<option [ngValue]="profissao.id" *ngFor="let profissao of profissoes">{{profissao.descricao}}</option>
+			</select>
 		</div>
 	</div>
 
