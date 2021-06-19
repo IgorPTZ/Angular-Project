@@ -18,4 +18,6 @@ export class Usuario {
 	telefones: Array<Telefone>;
 
 	dataDeNascimento: string;
+
+	salario: DoubleRange;
 }

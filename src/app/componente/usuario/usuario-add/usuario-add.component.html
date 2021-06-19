@@ -59,6 +59,14 @@
 				<option [ngValue]="profissao.id" *ngFor="let profissao of profissoes">{{profissao.descricao}}</option>
 			</select>
 		</div>
+
+		<div class="form-group col-md-3">
+			<label for="salario">Salario</label>
+			<span style="color: red;font-size:23px;" *ngIf="salarioValidate.invalid"> *</span>
+			<input type="text" [(ngModel)]="usuario.salario"  #salarioValidate="ngModel" 
+				   currencyMask [options]="{prefix : 'R$', thousands: '.', decimal: ','}"
+				   class="form-control" id="salario" name="salario" required="true">
+		</div>
 	</div>
 
 	<div class="card text-center">
