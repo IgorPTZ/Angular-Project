@@ -18,6 +18,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.usuario);
   }
 
+  public recuperarAcesso() {
+
+    this.loginService.recuperarAcesso(this.usuario.login);
+  }
+
   ngOnInit(): void {
 
     // Verifica se o token esta armazenado no navegador, caso esteja, redireciona para tela home sem precisar logar novamente
