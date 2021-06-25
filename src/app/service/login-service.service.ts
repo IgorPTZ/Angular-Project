@@ -26,6 +26,7 @@ export class LoginServiceService {
 
       this.router.navigate(['home']);
     }, error => {
+        alert("Erro ao fazer login! Login e/ou senha estao incorretos!");
         console.error("Erro ao fazer login! Login e/ou senha estao incorretos!");
       }
     );
