@@ -62,4 +62,10 @@ export class UsuarioService {
       return false;
     }
   }
+
+  baixarRelatorio(): any {
+    return this.http.get(AppConstants.baseUrl + 'baixar-relatorio', {responseType : 'text'}).subscribe(data => {
+      document.querySelector('iframe').src = data;
+    });
+  }
 }

@@ -75,4 +75,8 @@ export class UsuarioComponent implements OnInit {
       });
     }
   }
+
+  baixarRelatorio() {
+    return this.usuarioService.baixarRelatorio();
+  }
 }

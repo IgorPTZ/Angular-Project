@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpInterceptorModule } from './service/header-interceptor.service';
 import { UsuarioComponent } from './componente/usuario/usuario/usuario.component';
 import { UsuarioAddComponent } from './componente/usuario/usuario-add/usuario-add.component';
+import {UsuarioRelatorioComponent} from './componente/usuario/usuario-relatorio/usuario-relatorio.component';
 import { GuardiaoGuard } from './service/guardiao.guard';
 import {NgxMaskModule, IConfig} from 'ngx-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -23,11 +24,12 @@ export const appRouters: Routes = [
   {path : 'usuarios', component : UsuarioComponent, canActivate: [GuardiaoGuard]},
   {path : 'usuarioAdd', component : UsuarioAddComponent, canActivate: [GuardiaoGuard]},
   {path : 'usuarioAdd/:id', component : UsuarioAddComponent, canActivate: [GuardiaoGuard]},
+  {path : 'relatorioUsuario', component: UsuarioRelatorioComponent, canActivate: [GuardiaoGuard]}
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(appRouters);
 
-export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
+export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ export const optionsMask : Partial<IConfig> | (() => Partial<IConfig>) = {};
     HomeComponent,
     LoginComponent,
     UsuarioComponent,
-    UsuarioAddComponent
+    UsuarioAddComponent,
+    UsuarioRelatorioComponent
   ],
   imports: [
     BrowserModule,
