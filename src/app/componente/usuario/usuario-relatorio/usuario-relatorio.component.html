@@ -37,7 +37,21 @@
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<button type="button" class="btn btn-primary" [routerLink]="['/usuarios']" routerLinkActive="router-link-active">Voltar</button>
-		    <button type="button" class="btn btn-primary" (click)="baixarRelatorio()" style="margin-left: 10px;">Solicitar relatorio</button>
+		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDoRelatorio" (click)="baixarRelatorioParametrizado()"  style="margin-left: 10px;">Obter relatorio</button>
 		</div>
 	</div>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDoRelatorio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="min-width: 90%; min-height: 90%; height: 90%;">
+    <div class="modal-content">
+      <div class="modal-body">
+        <iframe id="relatorio" width="100%" height="500" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

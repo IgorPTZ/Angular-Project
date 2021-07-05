@@ -24,7 +24,7 @@ export class FormatDateAdapter extends NgbDateAdapter<string> {
   }
 
   toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+    return date ? formatarString(date.day) + this.DELIMITER + formatarString(date.month) + this.DELIMITER + date.year : null;
   }
 }
 
@@ -53,7 +53,7 @@ export class FormatadorDeData extends NgbDateParserFormatter {
   }
 
   toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
+    return date ? formatarString(date.day) + this.DELIMITER + formatarString(date.month) + this.DELIMITER + date.year : null;
   }
 }
 
@@ -78,7 +78,9 @@ export class UsuarioRelatorioComponent {
 
   constructor(private routeActive: ActivatedRoute, private usuarioService: UsuarioService) { }
 
-  baixarRelatorio() {
+  baixarRelatorioParametrizado() {
     console.log(this.relatorio);
+
+    this.usuarioService.baixarRelatorioParametrizado(this.relatorio);
   }
 }

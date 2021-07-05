@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConstants } from '../app-constants';
 import { Observable } from 'rxjs';
 import { Usuario } from '../model/usuario';
+import { Relatorio } from '../model/relatorio';
 
 @Injectable({
   providedIn: 'root'
@@ -68,4 +69,11 @@ export class UsuarioService {
       document.querySelector('iframe').src = data;
     });
   }
+
+  baixarRelatorioParametrizado(relatorio: Relatorio): any {
+
+    return this.http.post(AppConstants.baseUrl + 'baixar-relatorio-parametrizado/', relatorio, {responseType: 'text'}).subscribe(data => {
+      document.querySelector('iframe').src = data;
+    });
+  } 
 }
