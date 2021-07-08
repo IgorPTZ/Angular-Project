@@ -75,5 +75,5 @@ export class UsuarioService {
     return this.http.post(AppConstants.baseUrl + 'baixar-relatorio-parametrizado/', relatorio, {responseType: 'text'}).subscribe(data => {
       document.querySelector('iframe').src = data;
     });
-  } 
+  }
 }

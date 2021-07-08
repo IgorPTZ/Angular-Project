@@ -16,6 +16,8 @@ import {NgxMaskModule, IConfig} from 'ngx-mask';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxCurrencyModule} from 'ngx-currency';
+import {ChartsModule} from 'ng2-charts';
+import { BarChartComponent } from './componente/bar-chart/bar-chart.component';
 
 export const appRouters: Routes = [
   {path : 'home', component: HomeComponent, canActivate: [GuardiaoGuard]},
@@ -24,7 +26,8 @@ export const appRouters: Routes = [
   {path : 'usuarios', component : UsuarioComponent, canActivate: [GuardiaoGuard]},
   {path : 'usuarioAdd', component : UsuarioAddComponent, canActivate: [GuardiaoGuard]},
   {path : 'usuarioAdd/:id', component : UsuarioAddComponent, canActivate: [GuardiaoGuard]},
-  {path : 'relatorioUsuario', component: UsuarioRelatorioComponent, canActivate: [GuardiaoGuard]}
+  {path : 'relatorioUsuario', component: UsuarioRelatorioComponent, canActivate: [GuardiaoGuard]},
+  {path : 'grafico', component: BarChartComponent, canActivate: [GuardiaoGuard]}
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(appRouters);
@@ -38,7 +41,8 @@ export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {};
     LoginComponent,
     UsuarioComponent,
     UsuarioAddComponent,
-    UsuarioRelatorioComponent
+    UsuarioRelatorioComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,8 @@ export const optionsMask: Partial<IConfig> | (() => Partial<IConfig>) = {};
     NgxMaskModule.forRoot(optionsMask),
     NgxPaginationModule,
     NgbModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
