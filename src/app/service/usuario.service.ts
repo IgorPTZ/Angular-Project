@@ -76,4 +76,8 @@ export class UsuarioService {
       document.querySelector('iframe').src = data;
     });
   }
+
+  obterDadosDoGrafico(): Observable<any> {
+    return this.http.get(AppConstants.baseUrl + 'obter-dados-do-grafico/');
+  }
 }
